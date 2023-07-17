@@ -1,0 +1,283 @@
+# 日历节假日
+
+### 需求
+
+在类似  **项目阶段**和**日程计划** 等对**节假日敏感** 的场景中  日期选择框标记下节假日
+
+<img src="https://leetan.oss-cn-beijing.aliyuncs.com/code/holiday.png" />
+
+### 解决方案
+
+维护近三-五年的国家法定节假日json数据
+
+* 使用自己维护json的方式：性能高、可靠性强
+*  每年更新一次(在国务院通知下一年节假日安排时，基本在每年11-12月)
+* [政府网文件搜索列表页](http://sousuo.gov.cn/list.htm?q=&n=15&t=paper&childtype=&subchildtype=&pcodeJiguan=&pcodeYear=&pcodeNum=&location=&sort=pubtime&searchfield=title&title=%E8%8A%82%E5%81%87%E6%97%A5%E5%AE%89%E6%8E%92&content=&pcode=&puborg=&timetype=timeqb&mintime=&maxtime=&Submit)
+
+### 数据来源
+
+[政府网文件搜索列表页](http://sousuo.gov.cn/list.htm?q=&n=15&t=paper&childtype=&subchildtype=&pcodeJiguan=&pcodeYear=&pcodeNum=&location=&sort=pubtime&searchfield=title&title=%E8%8A%82%E5%81%87%E6%97%A5%E5%AE%89%E6%8E%92&content=&pcode=&puborg=&timetype=timeqb&mintime=&maxtime=&Submit)
+
+国务院法定节日文件 ：http://suo.nz/5aADIE
+
+第三方的API的参考：可以参考他们的json数据结构
+
+https://timor.tech/api/holiday
+
+https://timor.tech/api/holiday/year/2020/
+
+[https://timor.tech/api/holiday/year/2021](https://timor.tech/api/holiday/year/2021/)
+
+
+```javascript
+`//"holiday":false,  调休 上班`
+`// "holiday":true,  法定节日`
+{
+    "code":0,
+    "holiday":{
+        "01-01":{
+            "holiday":true,
+            "name":"元旦",
+            "wage":3,
+            "date":"2021-01-01"
+        },
+        "01-02":{
+            "holiday":true,
+            "name":"元旦",
+            "wage":2,
+            "date":"2021-01-02"
+        },
+        "01-03":{
+            "holiday":true,
+            "name":"元旦",
+            "wage":2,
+            "date":"2021-01-03"
+        },
+        "02-07":{
+            "holiday":false,
+            "name":"春节前调休",
+            "after":false,
+            "wage":1,
+            "target":"春节",
+            "date":"2021-02-07"
+        },
+        "02-11":{
+            "holiday":true,
+            "name":"除夕",
+            "wage":2,
+            "date":"2021-02-11"
+        },
+        "02-12":{
+            "holiday":true,
+            "name":"初一",
+            "wage":3,
+            "date":"2021-02-12"
+        },
+        "02-13":{
+            "holiday":true,
+            "name":"初二",
+            "wage":3,
+            "date":"2021-02-13"
+        },
+        "02-14":{
+            "holiday":true,
+            "name":"初三",
+            "wage":3,
+            "date":"2021-02-14"
+        },
+        "02-15":{
+            "holiday":true,
+            "name":"初四",
+            "wage":2,
+            "date":"2021-02-15"
+        },
+        "02-16":{
+            "holiday":true,
+            "name":"初五",
+            "wage":2,
+            "date":"2021-02-16"
+        },
+        "02-17":{
+            "holiday":true,
+            "name":"初六",
+            "wage":2,
+            "date":"2021-02-17"
+        },
+        "02-20":{
+            "holiday":false,
+            "name":"春节后调休",
+            "after":true,
+            "wage":1,
+            "target":"春节",
+            "date":"2021-02-20"
+        },
+        "04-03":{
+            "holiday":true,
+            "name":"清明节",
+            "wage":3,
+            "date":"2021-04-03",
+            "rest":31
+        },
+        "04-04":{
+            "holiday":true,
+            "name":"清明节",
+            "wage":2,
+            "date":"2021-04-04"
+        },
+        "04-05":{
+            "holiday":true,
+            "name":"清明节",
+            "wage":2,
+            "date":"2021-04-05"
+        },
+        "04-25":{
+            "holiday":false,
+            "name":"劳动节前调休",
+            "after":false,
+            "wage":1,
+            "target":"劳动节",
+            "date":"2021-04-25"
+        },
+        "05-01":{
+            "holiday":true,
+            "name":"劳动节",
+            "wage":3,
+            "date":"2021-05-01"
+        },
+        "05-02":{
+            "holiday":true,
+            "name":"劳动节",
+            "wage":2,
+            "date":"2021-05-02"
+        },
+        "05-03":{
+            "holiday":true,
+            "name":"劳动节",
+            "wage":2,
+            "date":"2021-05-03"
+        },
+        "05-04":{
+            "holiday":true,
+            "name":"劳动节",
+            "wage":2,
+            "date":"2021-05-04"
+        },
+        "05-05":{
+            "holiday":true,
+            "name":"劳动节",
+            "wage":2,
+            "date":"2021-05-05"
+        },
+        "05-08":{
+            "holiday":false,
+            "name":"劳动节后调休",
+            "after":true,
+            "wage":1,
+            "target":"劳动节",
+            "date":"2021-05-08"
+        },
+        "06-12":{
+            "holiday":true,
+            "name":"端午节",
+            "wage":3,
+            "date":"2021-06-12"
+        },
+        "06-13":{
+            "holiday":true,
+            "name":"端午节",
+            "wage":2,
+            "date":"2021-06-13"
+        },
+        "06-14":{
+            "holiday":true,
+            "name":"端午节",
+            "wage":2,
+            "date":"2021-06-14"
+        },
+        "09-18":{
+            "holiday":false,
+            "after":false,
+            "name":"中秋节前调休",
+            "wage":1,
+            "target":"中秋节",
+            "date":"2021-09-18"
+        },
+        "09-19":{
+            "holiday":true,
+            "name":"中秋节",
+            "wage":3,
+            "date":"2021-09-19"
+        },
+        "09-20":{
+            "holiday":true,
+            "name":"中秋节",
+            "wage":2,
+            "date":"2021-09-20"
+        },
+        "09-21":{
+            "holiday":true,
+            "name":"中秋节",
+            "wage":2,
+            "date":"2021-09-21"
+        },
+        "09-26":{
+            "holiday":false,
+            "after":false,
+            "name":"国庆节前调休",
+            "wage":1,
+            "target":"国庆节",
+            "date":"2021-09-26"
+        },
+        "10-01":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":3,
+            "date":"2021-10-01"
+        },
+        "10-02":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":3,
+            "date":"2021-10-02"
+        },
+        "10-03":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":3,
+            "date":"2021-10-03"
+        },
+        "10-04":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":2,
+            "date":"2021-10-04"
+        },
+        "10-05":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":2,
+            "date":"2021-10-05"
+        },
+        "10-06":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":2,
+            "date":"2021-10-06"
+        },
+        "10-07":{
+            "holiday":true,
+            "name":"国庆节",
+            "wage":2,
+            "date":"2021-10-07"
+        },
+        "10-09":{
+            "holiday":false,
+            "name":"国庆节后调休",
+            "after":true,
+            "wage":1,
+            "target":"国庆节",
+            "date":"2021-10-09"
+        }
+    }
+}
+```
